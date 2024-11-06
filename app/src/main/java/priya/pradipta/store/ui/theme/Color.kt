@@ -1,4 +1,4 @@
-package priya.pradipta.techassessment.ui.theme
+package priya.pradipta.store.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

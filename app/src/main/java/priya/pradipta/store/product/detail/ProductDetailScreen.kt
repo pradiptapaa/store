@@ -1,4 +1,4 @@
-package priya.pradipta.techassessment.product.detail
+package priya.pradipta.store.product.detail
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -13,10 +13,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import priya.pradipta.techassessment.component.BaseImageRemote
-import priya.pradipta.techassessment.component.BaseLoading
-import priya.pradipta.techassessment.product.list.BaseGap
-import priya.pradipta.techassessment.product.list.Product
+import priya.pradipta.store.component.BaseImageRemote
+import priya.pradipta.store.component.BaseLoading
+import priya.pradipta.store.product.list.BaseGap
+import priya.pradipta.store.product.list.Product
 
 data class ProductDetail(
     val name: String,

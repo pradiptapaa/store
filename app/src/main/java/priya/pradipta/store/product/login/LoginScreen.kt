@@ -1,4 +1,4 @@
-package priya.pradipta.techassessment.product.login
+package priya.pradipta.store.product.login
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -24,8 +24,8 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import priya.pradipta.techassessment.component.BaseLoading
-import priya.pradipta.techassessment.product.list.BaseGap
+import priya.pradipta.store.component.BaseLoading
+import priya.pradipta.store.product.list.BaseGap
 
 sealed class LoginScreenUIState {
     data object Initial : LoginScreenUIState()
@@ -41,9 +41,10 @@ sealed class LoginScreenUIState {
 
 @Composable
 fun LoginScreen(state: LoginScreenUIState = LoginScreenUIState.Initial) {
-    if(state == LoginScreenUIState.Loading){
-        BaseLoading()
-    }
+    if (state == LoginScreenUIState.Loading)
+        {
+            BaseLoading()
+        }
 
     Column {
         BaseGap(16.dp)

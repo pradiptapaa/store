@@ -1,4 +1,4 @@
-package priya.pradipta.techassessment.product.list.item
+package priya.pradipta.store.product.list.item
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
@@ -11,8 +11,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import priya.pradipta.techassessment.component.BaseImageRemote
-import priya.pradipta.techassessment.product.list.Product
+import priya.pradipta.store.component.BaseImageRemote
+import priya.pradipta.store.product.list.Product
 
 @Composable
 fun ProductListItem(

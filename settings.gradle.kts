@@ -19,7 +19,7 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "Tech Assessment"
+rootProject.name = "Store"
 include(":app")
 include(":store-domain")
 include(":store-data")

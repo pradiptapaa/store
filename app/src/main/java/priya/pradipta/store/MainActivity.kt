@@ -1,4 +1,4 @@
-package priya.pradipta.techassessment
+package priya.pradipta.store
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -11,14 +11,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import priya.pradipta.techassessment.ui.theme.TechAssessmentTheme
+import priya.pradipta.store.ui.theme.StoreTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            TechAssessmentTheme {
+            StoreTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
                         name = "Android",
@@ -44,7 +44,7 @@ fun Greeting(
 @Preview(showBackground = true)
 @Composable
 private fun GreetingPreview() {
-    TechAssessmentTheme {
+    StoreTheme {
         Greeting("Android")
     }
 }

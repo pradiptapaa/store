@@ -1,4 +1,4 @@
-package priya.pradipta.techassessment.product.list
+package priya.pradipta.store.product.list
 
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
@@ -11,7 +11,7 @@ import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import priya.pradipta.techassessment.product.list.item.ProductListItem
+import priya.pradipta.store.product.list.item.ProductListItem
 
 data class Product(
     val name: String = "",
@@ -70,7 +70,10 @@ fun ProductListScreen(
 }
 
 @Composable
-fun BaseGap(gap: Dp, modifier : Modifier = Modifier) {
+fun BaseGap(
+    gap: Dp,
+    modifier: Modifier = Modifier,
+) {
     Spacer(modifier = modifier.size(gap))
 }
 

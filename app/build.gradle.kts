@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "priya.pradipta.techassessment"
+    namespace = "priya.pradipta.store"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "priya.pradipta.techassessment"
+        applicationId = "priya.pradipta.store"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

@@ -1,4 +1,4 @@
-package priya.pradipta.techassessment.cart.item
+package priya.pradipta.store.cart.item
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
@@ -27,8 +27,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import priya.pradipta.techassessment.component.BaseImageRemote
-import priya.pradipta.techassessment.product.list.BaseGap
+import priya.pradipta.store.component.BaseImageRemote
+import priya.pradipta.store.product.list.BaseGap
 
 data class Cart(
     val image: String? = null,
