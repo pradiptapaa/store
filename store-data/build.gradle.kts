@@ -12,4 +12,5 @@ dependencies {
     implementation(libs.ktor.client.core)
     implementation(project(":store-domain"))
     implementation(project(":common"))
+    implementation(libs.androidx.room.common)
 }
