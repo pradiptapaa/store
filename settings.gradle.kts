@@ -23,3 +23,4 @@ rootProject.name = "Store"
 include(":app")
 include(":store-domain")
 include(":store-data")
+include(":common")
