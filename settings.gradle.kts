@@ -22,3 +22,4 @@ dependencyResolutionManagement {
 rootProject.name = "Tech Assessment"
 include(":app")
 include(":store-domain")
+include(":store-data")
