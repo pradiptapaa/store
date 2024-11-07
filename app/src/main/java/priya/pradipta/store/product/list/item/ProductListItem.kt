@@ -27,58 +27,72 @@ fun ProductListItem(
     modifier: Modifier = Modifier,
     product: ProductModel = ProductModel(),
 ) {
-    val defaultTextModifier = Modifier.fillMaxWidth()
-    Column(modifier = modifier.fillMaxWidth().height(IntrinsicSize.Min).clickable { }) {
+    Column(
+        modifier =
+            modifier
+                .fillMaxWidth()
+                .height(IntrinsicSize.Min)
+                .clickable { },
+    ) {
         BaseGap(8.dp)
         Row {
             BaseImageRemote(url = product.image, modifier = Modifier.size(160.dp))
             BaseGap(8.dp)
-            Column {
-                // name
-                Text(
-                    text = product.name,
-                    modifier = defaultTextModifier,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                    style = MaterialTheme.typography.labelLarge,
-                )
-                BaseGap(2.dp)
-                Text(
-                    text = product.getCapitalizeCategory(),
-                    modifier = defaultTextModifier,
-                    style = MaterialTheme.typography.labelMedium,
-                )
-                BaseGap(4.dp)
-                // price
-                Text(
-                    text = product.price,
-                    modifier = defaultTextModifier,
-                    style = MaterialTheme.typography.labelMedium,
-                )
-                BaseGap(2.dp)
-                // rating
-                Row(modifier = Modifier, verticalAlignment = Alignment.CenterVertically) {
-                    Icon(
-                        Icons.Outlined.Star,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.primaryContainer,
-                    )
-                    BaseGap(4.dp)
-                    Text(
-                        text = product.rating,
-                        style = MaterialTheme.typography.labelMedium,
-                    )
-                    BaseGap(4.dp)
-                    Text(
-                        text = "(${product.count})",
-                        color = MaterialTheme.colorScheme.secondary,
-                        style = MaterialTheme.typography.labelMedium,
-                    )
-                }
-                // description
-            }
+            ProductHeaderDetail(product)
         }
         BaseGap(8.dp)
+    }
+}
+
+@Composable
+fun ProductHeaderDetail(
+    product: ProductModel = ProductModel(),
+    titleMaxLines: Int = 1,
+) {
+    val defaultTextModifier = Modifier.fillMaxWidth()
+
+    Column {
+        // name
+        Text(
+            text = product.name,
+            modifier = defaultTextModifier,
+            maxLines = titleMaxLines,
+            overflow = TextOverflow.Ellipsis,
+            style = MaterialTheme.typography.labelLarge,
+        )
+        BaseGap(2.dp)
+        Text(
+            text = product.getCapitalizeCategory(),
+            modifier = defaultTextModifier,
+            style = MaterialTheme.typography.labelMedium,
+        )
+        BaseGap(4.dp)
+        // price
+        Text(
+            text = product.price,
+            modifier = defaultTextModifier,
+            style = MaterialTheme.typography.labelMedium,
+        )
+        BaseGap(2.dp)
+        // rating
+        Row(modifier = Modifier, verticalAlignment = Alignment.CenterVertically) {
+            Icon(
+                Icons.Outlined.Star,
+                contentDescription = null,
+                tint = MaterialTheme.colorScheme.primaryContainer,
+            )
+            BaseGap(4.dp)
+            Text(
+                text = product.rating,
+                style = MaterialTheme.typography.labelMedium,
+            )
+            BaseGap(4.dp)
+            Text(
+                text = "(${product.count})",
+                color = MaterialTheme.colorScheme.secondary,
+                style = MaterialTheme.typography.labelMedium,
+            )
+        }
     }
 }
 
