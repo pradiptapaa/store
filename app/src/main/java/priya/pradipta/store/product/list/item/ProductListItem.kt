@@ -38,7 +38,7 @@ fun ProductListItem(
         Row {
             BaseImageRemote(url = product.image, modifier = Modifier.size(160.dp))
             BaseGap(8.dp)
-            ProductHeaderDetail(product)
+            ProductHeaderDetail(product = product)
         }
         BaseGap(8.dp)
     }
@@ -46,12 +46,13 @@ fun ProductListItem(
 
 @Composable
 fun ProductHeaderDetail(
+    modifier: Modifier = Modifier,
     product: ProductModel = ProductModel(),
     titleMaxLines: Int = 1,
 ) {
     val defaultTextModifier = Modifier.fillMaxWidth()
 
-    Column {
+    Column(modifier = modifier) {
         // name
         Text(
             text = product.name,

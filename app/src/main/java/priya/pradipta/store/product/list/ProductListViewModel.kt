@@ -24,7 +24,7 @@ class ProductListViewModel(
         getAllProducts()
     }
 
-    fun getAllProducts() {
+    private fun getAllProducts() {
         _uiState.value = ProductListUIState.Loading
         viewModelScope.launch {
             getProducts().also { result ->
