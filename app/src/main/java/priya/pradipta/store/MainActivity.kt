@@ -103,10 +103,11 @@ class MainActivity : ComponentActivity() {
                         }
                         composable<CartModel> {
                             val uiState by cartViewModel.uiState.collectAsState()
+                            cartViewModel.getCarts()
                             ProductListScreen(
                                 productListUIState = uiState,
                                 onClick = { navController.navigate(it) },
-                                title = "Cart List"
+                                title = "Cart List",
                             )
                         }
                     }

@@ -22,11 +22,7 @@ class CartViewModel(
         )
     val uiState: StateFlow<ProductListUIState> = _uiState.asStateFlow()
 
-    init {
-        getCarts()
-    }
-
-    private fun getCarts() {
+    fun getCarts() {
         _uiState.value = ProductListUIState.Loading
         viewModelScope.launch(Dispatchers.IO) {
             getCartsUseCase().also { result ->
