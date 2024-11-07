@@ -3,6 +3,7 @@ package priya.pradipta.store.product.detail
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -10,7 +11,6 @@ import kotlinx.coroutines.launch
 import priya.pradipta.common.ResultOf
 import priya.pradipta.store.domain.entity.Cart
 import priya.pradipta.store.domain.usecase.SaveToCarts
-import priya.pradipta.store.product.login.LoginScreenUIState
 import priya.pradipta.store.product.model.ProductModel
 
 class ProductDetailViewModel(
@@ -24,7 +24,7 @@ class ProductDetailViewModel(
 
     fun saveToCart(productModel: ProductModel) {
         _uiState.value = ProductDetailUIState.Loading
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             saveToCartUsecase(
                 cart =
                     Cart(

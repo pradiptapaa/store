@@ -1,5 +1,6 @@
 package priya.pradipta.store.product.detail
 
+import android.util.Log
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.aspectRatio
@@ -61,8 +62,10 @@ fun ProductDetailScreen(
     product: ProductModel = ProductModel(),
     productDetailState: ProductDetailUIState = ProductDetailUIState.Initial,
     onClick: () -> Unit = {},
+    onSaveToCart: () -> Unit = {},
 ) {
     var isCartShow by rememberSaveable { mutableStateOf(true) }
+    Log.d("Teeest", "ProductDetailScreen: $productDetailState")
     if (productDetailState is ProductDetailUIState.Loading) {
         BaseLoading()
     }
@@ -77,6 +80,7 @@ fun ProductDetailScreen(
         product = product,
         onClick = onClick,
         isCartShow = isCartShow,
+        onSaveToCart = onSaveToCart
     )
 }
 
@@ -96,13 +100,16 @@ fun ProductDetailContent(
         ),
     isCartShow: Boolean = true,
     onClick: () -> Unit = {},
+    onSaveToCart: () -> Unit = {},
 ) {
     Box(modifier = modifier.fillMaxSize()) {
         Column {
             BaseGap(8.dp)
             BaseImageRemote(
                 url = product.image,
-                modifier = Modifier.fillMaxWidth().aspectRatio(1.5f),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .aspectRatio(1.5f),
             )
             Column(modifier = Modifier.padding(8.dp)) {
                 ProductHeaderDetail(product = product, titleMaxLines = Int.MAX_VALUE)
@@ -118,6 +125,7 @@ fun ProductDetailContent(
             BaseFilledIconButton(
                 imageVector = Icons.Filled.ShoppingCart,
                 modifier = Modifier.align(Alignment.BottomEnd),
+                onClick = onSaveToCart,
             )
         }
         BaseFilledIconButton(
