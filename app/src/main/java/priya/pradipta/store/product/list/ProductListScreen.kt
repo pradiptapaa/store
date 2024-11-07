@@ -6,16 +6,18 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.capitalize
-import androidx.compose.ui.text.intl.Locale
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import priya.pradipta.store.common.PreviewTheme
+import priya.pradipta.store.common.toast
+import priya.pradipta.store.component.BaseLoading
 import priya.pradipta.store.product.list.item.ProductListItem
 import priya.pradipta.store.product.model.ProductModel
 
-
 sealed class ProductListUIState {
+    data object Initial : ProductListUIState()
+
     data object Loading : ProductListUIState()
 
     data class OnSuccess(
@@ -28,30 +30,27 @@ sealed class ProductListUIState {
 }
 
 @Composable
-fun ProductListScreen(
+fun ProductListScreen(productListUIState: ProductListUIState = ProductListUIState.Initial) {
+    val context = LocalContext.current
+    if (productListUIState is ProductListUIState.Loading) {
+        BaseLoading()
+    }
+    if (productListUIState is ProductListUIState.OnSuccess) {
+        ProductListContent(products = productListUIState.products)
+    }
+    if (productListUIState is ProductListUIState.OnFailure) {
+        toast(context, productListUIState.message)
+    }
+}
+
+@Composable
+fun ProductListContent(
     modifier: Modifier = Modifier,
-    products: List<ProductModel> =
-        listOf(
-            ProductModel(
-                name = "Lon Sellers",
-                price = "9100",
-                quantity = "21",
-                image = null,
-                category = "Man Clothes",
-                rating = "antiopam",
-            ),
-            ProductModel(
-                name = "Lucile Calderon",
-                price = "appetere",
-                quantity = "diam",
-                image = null,
-                category = "himenaeos",
-                rating = "phasellus",
-            ),
-        ),
+    products: List<ProductModel> = listOf(),
 ) {
     LazyColumn(modifier = modifier) {
         items(products) { product ->
+            BaseGap(8.dp)
             ProductListItem(product = product)
             BaseGap(8.dp)
         }
@@ -66,8 +65,32 @@ fun BaseGap(
     Spacer(modifier = modifier.size(gap))
 }
 
-@Preview
+@PreviewTheme
 @Composable
 private fun ProductListScreenPreview() {
-    ProductListScreen()
+    ProductListContent(
+        products =
+            listOf(
+                ProductModel(
+                    name = "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
+                    price = "109.95",
+                    quantity = "eirmod",
+                    image = null,
+                    category = "Man's clothes",
+                    rating = "3.9",
+                    count = "120",
+                    description = "omittam",
+                ),
+                ProductModel(
+                    name = "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
+                    price = "109.95",
+                    quantity = "eirmod",
+                    image = null,
+                    category = "Man's clothes",
+                    rating = "3.9",
+                    count = "120",
+                    description = "omittam",
+                ),
+            ),
+    )
 }
