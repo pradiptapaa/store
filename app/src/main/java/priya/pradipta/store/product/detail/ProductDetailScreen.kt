@@ -64,13 +64,11 @@ fun ProductDetailScreen(
     onClick: () -> Unit = {},
     onSaveToCart: () -> Unit = {},
 ) {
-    var isCartShow by rememberSaveable { mutableStateOf(true) }
     Log.d("Teeest", "ProductDetailScreen: $productDetailState")
     if (productDetailState is ProductDetailUIState.Loading) {
         BaseLoading()
     }
     if (productDetailState is ProductDetailUIState.OnSaveToCartSuccess) {
-        isCartShow = false
     }
     val context = LocalContext.current
     if (productDetailState is ProductDetailUIState.OnSaveToCartFailure) {
@@ -79,7 +77,6 @@ fun ProductDetailScreen(
     ProductDetailContent(
         product = product,
         onClick = onClick,
-        isCartShow = isCartShow,
         onSaveToCart = onSaveToCart
     )
 }
