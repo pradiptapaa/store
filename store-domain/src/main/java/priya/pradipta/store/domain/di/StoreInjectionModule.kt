@@ -6,7 +6,7 @@ import priya.pradipta.store.domain.usecase.GetProducts
 import priya.pradipta.store.domain.usecase.Login
 import priya.pradipta.store.domain.usecase.SaveToCarts
 
-val storeInjectionModule =
+val storeUsecaseInjectionModule =
     module {
         single { GetCarts(get()) }
         single { GetProducts(get()) }
