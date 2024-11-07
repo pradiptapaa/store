@@ -1,6 +1,8 @@
 package priya.pradipta.store.product.login
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.text.KeyboardOptions
@@ -20,6 +22,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
@@ -45,9 +48,11 @@ fun LoginScreen(
         toast(context, state.message)
     }
 
-    Column(modifier = modifier) {
-        BaseGap(16.dp)
-        Text(text = "Login", style = MaterialTheme.typography.titleLarge)
+    Column(
+        modifier = modifier.padding(16.dp).fillMaxSize(),
+    ) {
+        BaseGap(64.dp)
+        Text(text = "Login", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
         BaseGap(16.dp)
         LoginForm(
             onUsernameChange = { username ->
@@ -58,14 +63,17 @@ fun LoginScreen(
             },
         )
         BaseGap(16.dp)
-        Button(onClick = {
-            onLoginClick(
-                LoginParameter(
-                    username = usernameState,
-                    password = passwordState,
-                ),
-            )
-        }) {
+        Button(
+            modifier = Modifier.fillMaxWidth(),
+            onClick = {
+                onLoginClick(
+                    LoginParameter(
+                        username = usernameState,
+                        password = passwordState,
+                    ),
+                )
+            },
+        ) {
             Text(text = "Login")
         }
     }
@@ -81,7 +89,7 @@ fun LoginForm(
     var password by rememberSaveable { mutableStateOf("") }
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
 
-    Column(modifier = modifier.padding(8.dp)) {
+    Column(modifier = modifier) {
         OutlinedTextField(
             value = username,
             onValueChange = {
@@ -90,7 +98,6 @@ fun LoginForm(
             },
             label = { Text("Username") },
             singleLine = true,
-            placeholder = { Text("Username") },
             modifier = Modifier.fillMaxWidth(),
         )
         BaseGap(8.dp)
@@ -102,7 +109,6 @@ fun LoginForm(
             },
             label = { Text("Password") },
             singleLine = true,
-            placeholder = { Text("Password") },
             visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
             trailingIcon = {
