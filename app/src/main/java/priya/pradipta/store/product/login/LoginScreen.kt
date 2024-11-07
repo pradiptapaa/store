@@ -37,6 +37,7 @@ fun LoginScreen(
     modifier: Modifier = Modifier,
     state: LoginScreenUIState = LoginScreenUIState.Initial,
     onLoginClick: (LoginParameter) -> Unit = {},
+    onLoginSuccess: () -> Unit = {},
 ) {
     val context = LocalContext.current
     var usernameState by rememberSaveable { mutableStateOf("") }
@@ -46,6 +47,9 @@ fun LoginScreen(
     }
     if (state is LoginScreenUIState.OnFailure) {
         toast(context, state.message)
+    }
+    if(state is LoginScreenUIState.OnSuccess) {
+        onLoginSuccess()
     }
 
     Column(

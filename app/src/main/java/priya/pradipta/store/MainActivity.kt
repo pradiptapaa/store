@@ -18,6 +18,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import priya.pradipta.store.product.list.ProductListModel
+import priya.pradipta.store.product.list.ProductListScreen
 import priya.pradipta.store.product.login.LoginModel
 import priya.pradipta.store.product.login.LoginScreen
 import priya.pradipta.store.product.login.LoginViewModel
@@ -49,7 +51,12 @@ class MainActivity : ComponentActivity() {
                                     username = params.username,
                                     password = params.password,
                                 )
-                            }, state = uiState)
+                            }, state = uiState, onLoginSuccess = {
+                                navController.navigate(ProductListModel)
+                            })
+                        }
+                        composable<ProductListModel> {
+                            ProductListScreen()
                         }
                     }
                 }

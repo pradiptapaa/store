@@ -2,7 +2,9 @@ package priya.pradipta.store.product.model
 
 import androidx.compose.ui.text.capitalize
 import androidx.compose.ui.text.intl.Locale
+import kotlinx.serialization.Serializable
 
+@Serializable
 data class ProductModel(
     val name: String = "",
     val price: String = "",
