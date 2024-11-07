@@ -8,8 +8,10 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.AddShoppingCart
 import androidx.compose.material.icons.filled.ArrowBackIosNew
 import androidx.compose.material.icons.filled.ShoppingCart
+import androidx.compose.material.icons.filled.ShoppingCartCheckout
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -61,6 +63,7 @@ sealed class ProductDetailUIState {
 fun ProductDetailScreen(
     product: ProductModel = ProductModel(),
     productDetailState: ProductDetailUIState = ProductDetailUIState.Initial,
+    isCartShow: Boolean = true,
     onClick: () -> Unit = {},
     onSaveToCart: () -> Unit = {},
     onSaveToCartSuccess: () -> Unit = {},
@@ -79,6 +82,7 @@ fun ProductDetailScreen(
     ProductDetailContent(
         product = product,
         onClick = onClick,
+        isCartShow = isCartShow,
         onSaveToCart = onSaveToCart
     )
 }
@@ -122,7 +126,7 @@ fun ProductDetailContent(
         }
         if (isCartShow) {
             BaseFilledIconButton(
-                imageVector = Icons.Filled.ShoppingCart,
+                imageVector = Icons.Filled.AddShoppingCart,
                 modifier = Modifier.align(Alignment.BottomEnd),
                 onClick = onSaveToCart,
             )

@@ -4,22 +4,28 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBarsPadding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import priya.pradipta.store.cart.CartModel
+import priya.pradipta.store.cart.item.BaseFilledIconButton
 import priya.pradipta.store.cart.list.CartViewModel
 import priya.pradipta.store.product.detail.ProductDetailScreen
 import priya.pradipta.store.product.detail.ProductDetailUIState
@@ -68,10 +74,18 @@ class MainActivity : ComponentActivity() {
                         }
                         composable<ProductListModel> {
                             val uiState by productListViewModel.uiState.collectAsState()
-                            ProductListScreen(
-                                productListUIState = uiState,
-                                onClick = { navController.navigate(it) },
-                            )
+                            Box {
+                                ProductListScreen(
+                                    productListUIState = uiState,
+                                    onClick = { navController.navigate(it) },
+                                    title = "Product List",
+                                )
+                                BaseFilledIconButton(
+                                    imageVector = Icons.Filled.ShoppingCart,
+                                    onClick = { navController.navigate(CartModel) },
+                                    modifier = Modifier.align(Alignment.TopEnd).padding(10.dp),
+                                )
+                            }
                         }
                         composable<ProductModel> { backStackEntry ->
                             val uiState by productDetailViewModel.uiState.collectAsState()
@@ -92,6 +106,7 @@ class MainActivity : ComponentActivity() {
                             ProductListScreen(
                                 productListUIState = uiState,
                                 onClick = { navController.navigate(it) },
+                                title = "Cart List"
                             )
                         }
                     }
