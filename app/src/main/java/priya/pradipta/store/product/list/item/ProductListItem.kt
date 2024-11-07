@@ -26,13 +26,14 @@ import priya.pradipta.store.product.model.ProductModel
 fun ProductListItem(
     modifier: Modifier = Modifier,
     product: ProductModel = ProductModel(),
+    onClick: () -> Unit = {},
 ) {
     Column(
         modifier =
             modifier
                 .fillMaxWidth()
                 .height(IntrinsicSize.Min)
-                .clickable { },
+                .clickable { onClick() },
     ) {
         BaseGap(8.dp)
         Row {

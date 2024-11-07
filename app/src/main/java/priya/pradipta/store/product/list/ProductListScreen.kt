@@ -9,7 +9,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.dp
 import priya.pradipta.store.common.PreviewTheme
 import priya.pradipta.store.common.toast
 import priya.pradipta.store.component.BaseLoading
@@ -31,14 +30,17 @@ sealed class ProductListUIState {
 }
 
 @Composable
-fun ProductListScreen(productListUIState: ProductListUIState = ProductListUIState.Initial) {
+fun ProductListScreen(
+    productListUIState: ProductListUIState = ProductListUIState.Initial,
+    onClick: (ProductModel) -> Unit = {},
+) {
     val context = LocalContext.current
     Log.d("Teeeeeeeeest", "ProductListScreen: $productListUIState")
     if (productListUIState is ProductListUIState.Loading) {
         BaseLoading()
     }
     if (productListUIState is ProductListUIState.OnSuccess) {
-        ProductListContent(products = productListUIState.products)
+        ProductListContent(products = productListUIState.products, onClick = onClick)
     }
     if (productListUIState is ProductListUIState.OnFailure) {
         toast(context, productListUIState.message)
@@ -49,10 +51,11 @@ fun ProductListScreen(productListUIState: ProductListUIState = ProductListUIStat
 fun ProductListContent(
     modifier: Modifier = Modifier,
     products: List<ProductModel> = listOf(),
+    onClick: (ProductModel) -> Unit = {},
 ) {
     LazyColumn(modifier = modifier) {
         items(products) { product ->
-            ProductListItem(product = product)
+            ProductListItem(product = product, onClick = { onClick(product) })
         }
     }
 }

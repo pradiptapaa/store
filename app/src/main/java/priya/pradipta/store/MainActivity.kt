@@ -17,13 +17,16 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import priya.pradipta.store.product.detail.ProductDetailContent
 import priya.pradipta.store.product.list.ProductListModel
 import priya.pradipta.store.product.list.ProductListScreen
 import priya.pradipta.store.product.list.ProductListViewModel
 import priya.pradipta.store.product.login.LoginModel
 import priya.pradipta.store.product.login.LoginScreen
 import priya.pradipta.store.product.login.LoginViewModel
+import priya.pradipta.store.product.model.ProductModel
 import priya.pradipta.store.ui.theme.StoreTheme
 
 class MainActivity : ComponentActivity() {
@@ -59,7 +62,17 @@ class MainActivity : ComponentActivity() {
                         }
                         composable<ProductListModel> {
                             val uiState by productListViewModel.uiState.collectAsState()
-                            ProductListScreen(uiState)
+                            ProductListScreen(
+                                productListUIState = uiState,
+                                onClick = { navController.navigate(it) },
+                            )
+                        }
+                        composable<ProductModel> { backStackEntry ->
+                            val product: ProductModel = backStackEntry.toRoute()
+                            ProductDetailContent(
+                                product = product,
+                                onClick = { navController.navigateUp() },
+                            )
                         }
                     }
                 }

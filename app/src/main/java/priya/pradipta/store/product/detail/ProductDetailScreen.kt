@@ -1,17 +1,23 @@
 package priya.pradipta.store.product.detail
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentWidth
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowBackIosNew
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
+import priya.pradipta.store.cart.item.BaseFilledIconButton
+import priya.pradipta.store.cart.item.BaseIconButton
 import priya.pradipta.store.common.PreviewTheme
 import priya.pradipta.store.component.BaseImageRemote
 import priya.pradipta.store.component.BaseLoading
@@ -61,14 +67,35 @@ fun ProductDetailContent(
             count = "120",
             description = "omittam",
         ),
+    onClick: () -> Unit = {}
 ) {
-    Column(modifier = modifier) {
-        BaseImageRemote(url = product.image, modifier = Modifier.fillMaxWidth().aspectRatio(1.5f))
-        Column( modifier = Modifier.padding(8.dp)) {
-            ProductHeaderDetail(product = product, titleMaxLines = Int.MAX_VALUE)
-            BaseGap(16.dp)
-            Text(text = product.description, style = MaterialTheme.typography.bodyMedium)
+    Box(modifier = modifier.fillMaxSize()) {
+
+        Column {
+            BaseGap(8.dp)
+            BaseImageRemote(
+                url = product.image,
+                modifier = Modifier.fillMaxWidth().aspectRatio(1.5f),
+            )
+            Column(modifier = Modifier.padding(8.dp)) {
+                ProductHeaderDetail(product = product, titleMaxLines = Int.MAX_VALUE)
+                BaseGap(16.dp)
+                Text(
+                    text = product.description,
+                    style = MaterialTheme.typography.bodyMedium,
+                    textAlign = TextAlign.Justify,
+                )
+            }
         }
+        BaseFilledIconButton(
+            imageVector = Icons.Filled.ShoppingCart,
+            modifier = Modifier.align(Alignment.BottomEnd),
+        )
+        BaseFilledIconButton(
+            imageVector = Icons.Filled.ArrowBackIosNew,
+            modifier = Modifier.align(Alignment.TopStart),
+            onClick = onClick
+        )
     }
 }
 

@@ -127,7 +127,7 @@ fun BaseIconButton(
     modifier: Modifier = Modifier,
     onClick: () -> Unit = {},
 ) {
-    IconButton(onClick = onClick, modifier = modifier) {
+    FilledIconButton (onClick = onClick, modifier = modifier) {
         Icon(imageVector, contentDescription = null, tint = MaterialTheme.colorScheme.primary)
     }
 }
