@@ -19,6 +19,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import priya.pradipta.store.cart.CartModel
+import priya.pradipta.store.cart.list.CartViewModel
 import priya.pradipta.store.product.detail.ProductDetailScreen
 import priya.pradipta.store.product.detail.ProductDetailViewModel
 import priya.pradipta.store.product.list.ProductListModel
@@ -39,6 +41,7 @@ class MainActivity : ComponentActivity() {
             val loginViewModel: LoginViewModel by viewModel()
             val productListViewModel: ProductListViewModel by viewModel()
             val productDetailViewModel: ProductDetailViewModel by viewModel()
+            val cartViewModel: CartViewModel by viewModel()
             StoreTheme {
                 Scaffold(
                     modifier =
@@ -48,7 +51,7 @@ class MainActivity : ComponentActivity() {
                 ) { innerPadding ->
                     NavHost(
                         navController = navController,
-                        startDestination = ProductListModel,
+                        startDestination = CartModel,
                         modifier = Modifier.padding(innerPadding),
                     ) {
                         composable<LoginModel> {
@@ -77,6 +80,14 @@ class MainActivity : ComponentActivity() {
                                 onClick = { navController.navigateUp() },
                                 productDetailState = uiState,
                                 onSaveToCart = { productDetailViewModel.saveToCart(product) },
+                                onSaveToCartSuccess = { navController.navigate(CartModel) },
+                            )
+                        }
+                        composable<CartModel> {
+                            val uiState by cartViewModel.uiState.collectAsState()
+                            ProductListScreen(
+                                productListUIState = uiState,
+                                onClick = { navController.navigate(it) },
                             )
                         }
                     }
