@@ -33,6 +33,8 @@ class ProductDetailViewModel(
                         price = productModel.price,
                         rating = productModel.rating,
                         count = productModel.count,
+                        category = productModel.category,
+                        description = productModel.description,
                     ),
             ).also { result ->
                 Log.d("Teeeeeeeeeeest", "doLogin: $result")
@@ -50,5 +52,9 @@ class ProductDetailViewModel(
                 }
             }
         }
+    }
+
+    fun emitEvent(state: ProductDetailUIState)  {
+        _uiState.value = state
     }
 }

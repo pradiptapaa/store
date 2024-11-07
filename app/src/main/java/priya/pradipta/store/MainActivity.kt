@@ -22,6 +22,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 import priya.pradipta.store.cart.CartModel
 import priya.pradipta.store.cart.list.CartViewModel
 import priya.pradipta.store.product.detail.ProductDetailScreen
+import priya.pradipta.store.product.detail.ProductDetailUIState
 import priya.pradipta.store.product.detail.ProductDetailViewModel
 import priya.pradipta.store.product.list.ProductListModel
 import priya.pradipta.store.product.list.ProductListScreen
@@ -51,7 +52,7 @@ class MainActivity : ComponentActivity() {
                 ) { innerPadding ->
                     NavHost(
                         navController = navController,
-                        startDestination = CartModel,
+                        startDestination = ProductListModel,
                         modifier = Modifier.padding(innerPadding),
                     ) {
                         composable<LoginModel> {
@@ -80,7 +81,10 @@ class MainActivity : ComponentActivity() {
                                 onClick = { navController.navigateUp() },
                                 productDetailState = uiState,
                                 onSaveToCart = { productDetailViewModel.saveToCart(product) },
-                                onSaveToCartSuccess = { navController.navigate(CartModel) },
+                                onSaveToCartSuccess = {
+                                    navController.navigate(CartModel)
+                                    productDetailViewModel.emitEvent(ProductDetailUIState.Initial)
+                                },
                             )
                         }
                         composable<CartModel> {

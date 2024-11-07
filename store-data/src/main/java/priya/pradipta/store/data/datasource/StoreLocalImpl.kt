@@ -14,8 +14,11 @@ class StoreLocalImpl(
                 CartEntity(
                     image = cart.image,
                     name = cart.name,
+                    category = cart.category,
+                    description = cart.description,
                     price = cart.price,
-                    quantity = cart.quantity,
+                    rating = cart.rating,
+                    count = cart.count,
                 ),
         )
     }
@@ -24,11 +27,13 @@ class StoreLocalImpl(
         val carts = dao.getAllCarts()
         return carts.map {
             Cart(
-                id = it.id,
                 image = it.image,
                 name = it.name,
+                category = it.category,
+                description = it.description,
                 price = it.price,
-                quantity = it.quantity,
+                rating = it.rating,
+                count = it.count,
             )
         }
     }
