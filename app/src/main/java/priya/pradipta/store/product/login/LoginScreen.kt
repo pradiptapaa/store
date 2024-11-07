@@ -19,48 +19,52 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import priya.pradipta.store.common.toast
 import priya.pradipta.store.component.BaseLoading
 import priya.pradipta.store.product.list.BaseGap
 
-sealed class LoginScreenUIState {
-    data object Initial : LoginScreenUIState()
-
-    data object Loading : LoginScreenUIState()
-
-    data class OnError(
-        val message: String,
-    ) : LoginScreenUIState()
-
-    data object OnSuccess : LoginScreenUIState()
-}
-
 @Composable
-fun LoginScreen(state: LoginScreenUIState = LoginScreenUIState.Initial) {
-    if (state == LoginScreenUIState.Loading)
-        {
-            BaseLoading()
-        }
+fun LoginScreen(
+    modifier: Modifier = Modifier,
+    state: LoginScreenUIState = LoginScreenUIState.Initial,
+    onLoginClick: (LoginParameter) -> Unit = {},
+) {
+    val context = LocalContext.current
+    var usernameState by rememberSaveable { mutableStateOf("") }
+    var passwordState by rememberSaveable { mutableStateOf("") }
+    if (state is LoginScreenUIState.Loading) {
+        BaseLoading()
+    }
+    if (state is LoginScreenUIState.OnFailure) {
+        toast(context, state.message)
+    }
 
-    Column {
+    Column(modifier = modifier) {
         BaseGap(16.dp)
         Text(text = "Login", style = MaterialTheme.typography.titleLarge)
         BaseGap(16.dp)
         LoginForm(
             onUsernameChange = { username ->
-                // Handle username change
+                usernameState = username
             },
             onPasswordChange = { password ->
-                // Handle password change
+                passwordState = password
             },
         )
         BaseGap(16.dp)
         Button(onClick = {
-            // Handle login button click
+            onLoginClick(
+                LoginParameter(
+                    username = usernameState,
+                    password = passwordState,
+                ),
+            )
         }) {
             Text(text = "Login")
         }

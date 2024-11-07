@@ -2,6 +2,7 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    kotlin("plugin.serialization") version "2.0.21"
 }
 
 android {
@@ -53,6 +54,12 @@ dependencies {
     implementation(libs.coil.network.okhttp)
     implementation(libs.androidx.material.icons.extended)
     implementation(libs.koin.androidx.compose)
+    implementation(project(":common"))
+    implementation(project(":store-data"))
+    implementation(project(":store-domain"))
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.kotlinx.serialization.json)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

@@ -17,10 +17,10 @@ class Store : Application() {
             androidContext(this@Store)
             modules(
                 storeAppInjectionModule,
-                storeRoomInjectionModule,
-                storeDatasourceInjectionModule,
                 storeRepositoryInjectionModule,
+                storeDatasourceInjectionModule,
                 storeUsecaseInjectionModule,
+                storeRoomInjectionModule,
             )
         }
     }
