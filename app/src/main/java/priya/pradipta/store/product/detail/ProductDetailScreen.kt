@@ -16,7 +16,7 @@ import androidx.compose.ui.unit.dp
 import priya.pradipta.store.component.BaseImageRemote
 import priya.pradipta.store.component.BaseLoading
 import priya.pradipta.store.product.list.BaseGap
-import priya.pradipta.store.product.list.Product
+import priya.pradipta.store.product.model.ProductModel
 
 data class ProductDetail(
     val name: String,
@@ -49,8 +49,8 @@ fun ProductDetailScreen(
 @Composable
 fun ProductDetailContent(
     modifier: Modifier = Modifier,
-    product: Product =
-        Product(
+    product: ProductModel =
+        ProductModel(
             name = "Fred Nelson",
             price = "invidunt",
             quantity = "mentitum",

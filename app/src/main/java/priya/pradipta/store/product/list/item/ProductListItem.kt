@@ -12,12 +12,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import priya.pradipta.store.component.BaseImageRemote
-import priya.pradipta.store.product.list.Product
+import priya.pradipta.store.product.model.ProductModel
 
 @Composable
 fun ProductListItem(
     modifier: Modifier = Modifier,
-    product: Product = Product(),
+    product: ProductModel = ProductModel(),
 ) {
     val defaultTextModifier = Modifier.fillMaxWidth()
     Row(modifier = modifier.height(IntrinsicSize.Max).fillMaxWidth()) {
@@ -40,7 +40,7 @@ fun ProductListItem(
 private fun ProductListItemPreview() {
     ProductListItem(
         product =
-            Product(
+            ProductModel(
                 name = "Product 1",
                 image = "https://example.com/image1.jpg",
                 price = "$100",

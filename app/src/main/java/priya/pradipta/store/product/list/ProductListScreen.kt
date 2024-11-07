@@ -12,25 +12,14 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import priya.pradipta.store.product.list.item.ProductListItem
+import priya.pradipta.store.product.model.ProductModel
 
-data class Product(
-    val name: String = "",
-    val price: String = "",
-    val quantity: String = "",
-    val image: String? = null,
-    val category: String = "",
-    val rating: String = "",
-    val count: String = "",
-    val description: String = "",
-) {
-    fun getCapitalizeCategory(): String = category.capitalize(Locale.current)
-}
 
 sealed class ProductListUIState {
     data object Loading : ProductListUIState()
 
     data class OnSuccess(
-        val products: List<Product>,
+        val products: List<ProductModel>,
     ) : ProductListUIState()
 
     data class OnFailure(
@@ -41,9 +30,9 @@ sealed class ProductListUIState {
 @Composable
 fun ProductListScreen(
     modifier: Modifier = Modifier,
-    products: List<Product> =
+    products: List<ProductModel> =
         listOf(
-            Product(
+            ProductModel(
                 name = "Lon Sellers",
                 price = "9100",
                 quantity = "21",
@@ -51,7 +40,7 @@ fun ProductListScreen(
                 category = "Man Clothes",
                 rating = "antiopam",
             ),
-            Product(
+            ProductModel(
                 name = "Lucile Calderon",
                 price = "appetere",
                 quantity = "diam",
