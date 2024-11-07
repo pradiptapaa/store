@@ -1,6 +1,6 @@
 plugins {
-    id("java-library")
-    alias(libs.plugins.jetbrains.kotlin.jvm)
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
 }
 
 java {
@@ -13,4 +13,7 @@ dependencies {
     implementation(project(":store-domain"))
     implementation(project(":common"))
     implementation(libs.androidx.room.common)
+    implementation(libs.androidx.room.runtime)
+    annotationProcessor(libs.androidx.room.compiler)
+    implementation(libs.koin.core)
 }
