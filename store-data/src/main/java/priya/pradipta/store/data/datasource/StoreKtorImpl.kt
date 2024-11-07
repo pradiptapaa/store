@@ -6,8 +6,8 @@ import io.ktor.client.request.get
 import priya.pradipta.store.domain.datasource.StoreRemoteDatasource
 import priya.pradipta.store.domain.entity.Product
 
-class StoreKtorImpl : StoreRemoteDatasource {
-    private val client = HttpClient()
-
+class StoreKtorImpl(
+    private val client: HttpClient,
+) : StoreRemoteDatasource {
     override suspend fun getSProduct(): List<Product> = client.get("https://fakestoreapi.com/products").body()
 }

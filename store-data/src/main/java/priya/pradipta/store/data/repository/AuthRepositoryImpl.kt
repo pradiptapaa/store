@@ -12,8 +12,8 @@ class AuthRepositoryImpl(
         password: String,
     ): ResultOf<Unit> =
         try {
-            authRemoteDatasource.login(username, password)
-            ResultOf.Success(Unit)
+            val result = authRemoteDatasource.login(username, password)
+            ResultOf.Success(result)
         } catch (e: Exception) {
             ResultOf.Failure(e)
         }

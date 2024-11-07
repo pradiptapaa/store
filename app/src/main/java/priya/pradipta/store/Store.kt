@@ -4,6 +4,7 @@ import android.app.Application
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import priya.pradipta.store.data.di.storeDatasourceInjectionModule
+import priya.pradipta.store.data.di.storeHttpInjectionModule
 import priya.pradipta.store.data.di.storeRepositoryInjectionModule
 import priya.pradipta.store.data.di.storeRoomInjectionModule
 import priya.pradipta.store.di.storeAppInjectionModule
@@ -21,6 +22,7 @@ class Store : Application() {
                 storeDatasourceInjectionModule,
                 storeUsecaseInjectionModule,
                 storeRoomInjectionModule,
+                storeHttpInjectionModule,
             )
         }
     }

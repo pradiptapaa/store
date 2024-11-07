@@ -22,6 +22,12 @@ dependencies {
     implementation(project(":common"))
     implementation(libs.androidx.room.common)
     implementation(libs.androidx.room.runtime)
+    implementation(libs.ktor.client.android)
+    implementation(libs.ktor.client.okhttp)
+    implementation(libs.ktor.client.core.v150)
+    implementation(libs.ktor.serialization.gson)
+    implementation(libs.ktor.client.logging)
+    implementation(libs.ktor.client.content.negotiation)
     annotationProcessor(libs.androidx.room.compiler)
     implementation(libs.koin.core)
 }
