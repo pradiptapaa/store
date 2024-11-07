@@ -1,12 +1,12 @@
 package priya.pradipta.store.product.list.item
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.aspectRatio
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material3.Icon
@@ -28,53 +28,57 @@ fun ProductListItem(
     product: ProductModel = ProductModel(),
 ) {
     val defaultTextModifier = Modifier.fillMaxWidth()
-    Row(modifier = modifier.fillMaxWidth().height(IntrinsicSize.Max)) {
-        BaseImageRemote(url = product.image, modifier = Modifier.fillMaxHeight().aspectRatio(1f))
+    Column(modifier = modifier.fillMaxWidth().height(IntrinsicSize.Min).clickable { }) {
         BaseGap(8.dp)
-        Column {
-            // name
-            Text(
-                text = product.name,
-                modifier = defaultTextModifier,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-                style = MaterialTheme.typography.labelLarge,
-            )
-            BaseGap(2.dp)
-            Text(
-                text = product.getCapitalizeCategory(),
-                modifier = defaultTextModifier,
-                style = MaterialTheme.typography.labelMedium,
-            )
-            BaseGap(4.dp)
-            // price
-            Text(
-                text = product.price,
-                modifier = defaultTextModifier,
-                style = MaterialTheme.typography.labelMedium,
-            )
-            BaseGap(2.dp)
-            // rating
-            Row(modifier = Modifier, verticalAlignment = Alignment.CenterVertically) {
-                Icon(
-                    Icons.Outlined.Star,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.primaryContainer,
-                )
-                BaseGap(4.dp)
+        Row {
+            BaseImageRemote(url = product.image, modifier = Modifier.size(160.dp))
+            BaseGap(8.dp)
+            Column {
+                // name
                 Text(
-                    text = product.rating,
+                    text = product.name,
+                    modifier = defaultTextModifier,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    style = MaterialTheme.typography.labelLarge,
+                )
+                BaseGap(2.dp)
+                Text(
+                    text = product.getCapitalizeCategory(),
+                    modifier = defaultTextModifier,
                     style = MaterialTheme.typography.labelMedium,
                 )
                 BaseGap(4.dp)
+                // price
                 Text(
-                    text = "(${product.count})",
-                    color = MaterialTheme.colorScheme.secondary,
+                    text = product.price,
+                    modifier = defaultTextModifier,
                     style = MaterialTheme.typography.labelMedium,
                 )
+                BaseGap(2.dp)
+                // rating
+                Row(modifier = Modifier, verticalAlignment = Alignment.CenterVertically) {
+                    Icon(
+                        Icons.Outlined.Star,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.primaryContainer,
+                    )
+                    BaseGap(4.dp)
+                    Text(
+                        text = product.rating,
+                        style = MaterialTheme.typography.labelMedium,
+                    )
+                    BaseGap(4.dp)
+                    Text(
+                        text = "(${product.count})",
+                        color = MaterialTheme.colorScheme.secondary,
+                        style = MaterialTheme.typography.labelMedium,
+                    )
+                }
+                // description
             }
-            // description
         }
+        BaseGap(8.dp)
     }
 }
 

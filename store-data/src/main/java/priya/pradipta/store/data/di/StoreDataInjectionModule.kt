@@ -106,14 +106,13 @@ val storeHttpInjectionModule =
 
 val storeRoomInjectionModule =
     module {
-        single<CartDatabase> {
+        single<CartDao> {
             Room
                 .databaseBuilder(
                     get(),
                     CartDatabase::class.java,
                     "cart_database",
                 ).build()
+                .cartDao()
         }
-
-        single<CartDao> { get<CartDatabase>().cartDao() }
     }

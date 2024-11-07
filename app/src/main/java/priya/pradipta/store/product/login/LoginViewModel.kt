@@ -27,7 +27,6 @@ class LoginViewModel(
                 when (result) {
                     is ResultOf.Success -> {
                         _loginState.value = LoginScreenUIState.OnSuccess
-                        _loginState.value = LoginScreenUIState.Initial
                     }
 
                     is ResultOf.Failure -> {

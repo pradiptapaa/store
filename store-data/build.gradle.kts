@@ -1,5 +1,6 @@
 plugins {
     id("com.android.library")
+    kotlin("kapt") version "2.0.21"
     alias(libs.plugins.kotlin.android)
 }
 
@@ -20,14 +21,14 @@ dependencies {
     implementation(libs.ktor.client.core)
     implementation(project(":store-domain"))
     implementation(project(":common"))
-    implementation(libs.androidx.room.common)
-    implementation(libs.androidx.room.runtime)
     implementation(libs.ktor.client.android)
     implementation(libs.ktor.client.okhttp)
     implementation(libs.ktor.client.core.v150)
     implementation(libs.ktor.serialization.gson)
     implementation(libs.ktor.client.logging)
     implementation(libs.ktor.client.content.negotiation)
-    annotationProcessor(libs.androidx.room.compiler)
+    implementation(libs.androidx.room.common)
+    implementation(libs.androidx.room.runtime)
+    kapt(libs.androidx.room.compiler)
     implementation(libs.koin.core)
 }

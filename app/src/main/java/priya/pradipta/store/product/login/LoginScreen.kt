@@ -1,6 +1,6 @@
 package priya.pradipta.store.product.login
 
-import androidx.compose.foundation.layout.Arrangement
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -42,21 +42,28 @@ fun LoginScreen(
     val context = LocalContext.current
     var usernameState by rememberSaveable { mutableStateOf("") }
     var passwordState by rememberSaveable { mutableStateOf("") }
+    Log.d("Teeeest", "LoginScreen: state: $state")
     if (state is LoginScreenUIState.Loading) {
         BaseLoading()
     }
     if (state is LoginScreenUIState.OnFailure) {
         toast(context, state.message)
     }
-    if(state is LoginScreenUIState.OnSuccess) {
+    if (state is LoginScreenUIState.OnSuccess) {
         onLoginSuccess()
     }
 
     Column(
-        modifier = modifier.padding(16.dp).fillMaxSize(),
+        modifier = modifier
+            .padding(16.dp)
+            .fillMaxSize(),
     ) {
         BaseGap(64.dp)
-        Text(text = "Login", style = MaterialTheme.typography.titleLarge, fontWeight = FontWeight.Bold)
+        Text(
+            text = "Login",
+            style = MaterialTheme.typography.titleLarge,
+            fontWeight = FontWeight.Bold,
+        )
         BaseGap(16.dp)
         LoginForm(
             onUsernameChange = { username ->
@@ -89,8 +96,8 @@ fun LoginForm(
     onUsernameChange: (String) -> Unit = {},
     onPasswordChange: (String) -> Unit = {},
 ) {
-    var username by rememberSaveable { mutableStateOf("") }
-    var password by rememberSaveable { mutableStateOf("") }
+    var username by rememberSaveable { mutableStateOf("mor_2314") }
+    var password by rememberSaveable { mutableStateOf("83r5^_") }
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
 
     Column(modifier = modifier) {

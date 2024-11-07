@@ -20,6 +20,7 @@ import androidx.navigation.compose.rememberNavController
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import priya.pradipta.store.product.list.ProductListModel
 import priya.pradipta.store.product.list.ProductListScreen
+import priya.pradipta.store.product.list.ProductListViewModel
 import priya.pradipta.store.product.login.LoginModel
 import priya.pradipta.store.product.login.LoginScreen
 import priya.pradipta.store.product.login.LoginViewModel
@@ -32,6 +33,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             val navController = rememberNavController()
             val loginViewModel: LoginViewModel by viewModel()
+            val productListViewModel: ProductListViewModel by viewModel()
             StoreTheme {
                 Scaffold(
                     modifier =
@@ -41,7 +43,7 @@ class MainActivity : ComponentActivity() {
                 ) { innerPadding ->
                     NavHost(
                         navController = navController,
-                        startDestination = LoginModel,
+                        startDestination = ProductListModel,
                         modifier = Modifier.padding(innerPadding),
                     ) {
                         composable<LoginModel> {
@@ -56,7 +58,8 @@ class MainActivity : ComponentActivity() {
                             })
                         }
                         composable<ProductListModel> {
-                            ProductListScreen()
+                            val uiState by productListViewModel.uiState.collectAsState()
+                            ProductListScreen(uiState)
                         }
                     }
                 }

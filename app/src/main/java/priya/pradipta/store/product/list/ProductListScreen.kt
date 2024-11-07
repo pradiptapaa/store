@@ -1,5 +1,6 @@
 package priya.pradipta.store.product.list
 
+import android.util.Log
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -32,6 +33,7 @@ sealed class ProductListUIState {
 @Composable
 fun ProductListScreen(productListUIState: ProductListUIState = ProductListUIState.Initial) {
     val context = LocalContext.current
+    Log.d("Teeeeeeeeest", "ProductListScreen: $productListUIState")
     if (productListUIState is ProductListUIState.Loading) {
         BaseLoading()
     }
@@ -50,9 +52,7 @@ fun ProductListContent(
 ) {
     LazyColumn(modifier = modifier) {
         items(products) { product ->
-            BaseGap(8.dp)
             ProductListItem(product = product)
-            BaseGap(8.dp)
         }
     }
 }
