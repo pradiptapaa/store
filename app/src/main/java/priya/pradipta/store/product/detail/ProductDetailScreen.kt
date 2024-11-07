@@ -12,13 +12,18 @@ import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import priya.pradipta.store.cart.item.BaseFilledIconButton
-import priya.pradipta.store.cart.item.BaseIconButton
 import priya.pradipta.store.common.PreviewTheme
+import priya.pradipta.store.common.toast
 import priya.pradipta.store.component.BaseImageRemote
 import priya.pradipta.store.component.BaseLoading
 import priya.pradipta.store.product.list.BaseGap
@@ -32,25 +37,47 @@ data class ProductDetail(
 )
 
 sealed class ProductDetailUIState {
+    data object Initial : ProductDetailUIState()
+
     data object Loading : ProductDetailUIState()
 
-    data class OnSuccess(
+    data class OnDetailSuccess(
         val detail: ProductDetail,
     ) : ProductDetailUIState()
 
-    data class OnFailure(
+    data class OnDetailFailure(
+        val message: String,
+    ) : ProductDetailUIState()
+
+    data object OnSaveToCartSuccess : ProductDetailUIState()
+
+    data class OnSaveToCartFailure(
         val message: String,
     ) : ProductDetailUIState()
 }
 
 @Composable
 fun ProductDetailScreen(
-    productId: String,
-    productDetailState: ProductDetailUIState,
+    product: ProductModel = ProductModel(),
+    productDetailState: ProductDetailUIState = ProductDetailUIState.Initial,
+    onClick: () -> Unit = {},
 ) {
+    var isCartShow by rememberSaveable { mutableStateOf(true) }
     if (productDetailState is ProductDetailUIState.Loading) {
         BaseLoading()
     }
+    if (productDetailState is ProductDetailUIState.OnSaveToCartSuccess) {
+        isCartShow = false
+    }
+    val context = LocalContext.current
+    if (productDetailState is ProductDetailUIState.OnSaveToCartFailure) {
+        toast(context = context, message = productDetailState.message)
+    }
+    ProductDetailContent(
+        product = product,
+        onClick = onClick,
+        isCartShow = isCartShow,
+    )
 }
 
 @Composable
@@ -67,10 +94,10 @@ fun ProductDetailContent(
             count = "120",
             description = "omittam",
         ),
-    onClick: () -> Unit = {}
+    isCartShow: Boolean = true,
+    onClick: () -> Unit = {},
 ) {
     Box(modifier = modifier.fillMaxSize()) {
-
         Column {
             BaseGap(8.dp)
             BaseImageRemote(
@@ -87,14 +114,16 @@ fun ProductDetailContent(
                 )
             }
         }
-        BaseFilledIconButton(
-            imageVector = Icons.Filled.ShoppingCart,
-            modifier = Modifier.align(Alignment.BottomEnd),
-        )
+        if (isCartShow) {
+            BaseFilledIconButton(
+                imageVector = Icons.Filled.ShoppingCart,
+                modifier = Modifier.align(Alignment.BottomEnd),
+            )
+        }
         BaseFilledIconButton(
             imageVector = Icons.Filled.ArrowBackIosNew,
             modifier = Modifier.align(Alignment.TopStart),
-            onClick = onClick
+            onClick = onClick,
         )
     }
 }

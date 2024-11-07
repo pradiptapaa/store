@@ -6,4 +6,6 @@ data class Cart(
     val name: String = "",
     val price: String = "",
     val quantity: String = "",
+    val rating: String = "",
+    val count: String = ""
 )

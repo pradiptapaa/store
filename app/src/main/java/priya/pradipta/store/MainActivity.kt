@@ -19,7 +19,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.toRoute
 import org.koin.androidx.viewmodel.ext.android.viewModel
-import priya.pradipta.store.product.detail.ProductDetailContent
+import priya.pradipta.store.product.detail.ProductDetailScreen
 import priya.pradipta.store.product.list.ProductListModel
 import priya.pradipta.store.product.list.ProductListScreen
 import priya.pradipta.store.product.list.ProductListViewModel
@@ -69,7 +69,7 @@ class MainActivity : ComponentActivity() {
                         }
                         composable<ProductModel> { backStackEntry ->
                             val product: ProductModel = backStackEntry.toRoute()
-                            ProductDetailContent(
+                            ProductDetailScreen(
                                 product = product,
                                 onClick = { navController.navigateUp() },
                             )
